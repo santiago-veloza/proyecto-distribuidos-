@@ -1,0 +1,84 @@
+/* Animación de aparición con deslizamiento */
+@keyframes aparecer {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fondo con animación sutil */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    text-align: center;
+    margin: 50px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animación en el contenedor */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    margin: auto;
+    opacity: 0;
+    animation: aparecer 1s ease-in-out forwards;
+}
+
+/* Efecto en los campos de entrada */
+input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Aumenta el tamaño y cambia el borde al seleccionar */
+input[type="text"]:focus, input[type="password"]:focus {
+    transform: scale(1.05);
+    border-color: #28a745;
+    box-shadow: 0px 0px 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Efecto en el botón */
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Efecto hover en el botón */
+button:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+/* Animación de error */
+.error {
+    color: red;
+    font-weight: bold;
+    animation: parpadeo 1s infinite alternate;
+}
+
+/* Efecto de parpadeo para errores */
+@keyframes parpadeo {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}

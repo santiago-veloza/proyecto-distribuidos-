@@ -1,57 +1,75 @@
 <!--index.html-->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h2>Bienvenido, {{ request.user.username }}</h2>
-    <a href="{% url 'logout' %}">Cerrar Sesión</a>
 
-    
-    <h3>Lista de Productos</h3>
-    <ul>
-        {% for producto in productos %}
-            <li>{{ producto.nombre }} - {{ producto.precio }}</li>
-        {% empty %}
-            <p>No hay productos disponibles.</p>
-        {% endfor %}
-    </ul>
+    <div class="container mt-4">
+        <h2>Bienvenido, {{ request.user.username }}</h2>
+        <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar Sesión</a>
 
-    <h4 class="mt-4">Inventario de Productos</h4>
-    <a href="{% url 'agregar_producto' %}" class="btn btn-success mb-3">Agregar Producto</a>
-
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
+        <h3 class="mt-4">Lista de Productos</h3>
+        <ul>
             {% for producto in productos %}
-            <tr>
-                <td>{{ producto.nombre }}</td>
-                <td>{{ producto.descripcion }}</td>
-                <td>${{ producto.precio }}</td>
-                <td>{{ producto.cantidad }}</td>
-                <td>
-                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
+                <li>{{ producto.nombre }} - {{ producto.precio }}</li>
+            {% empty %}
+                <p>No hay productos disponibles.</p>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
+        </ul>
 
+        <h4 class="mt-4">Inventario de Productos</h4>
+        
+        <div class="mb-3">
+            <a href="{% url 'agregar_producto' %}" class="btn btn-success">Agregar Producto</a>
+            <a class="btn btn-primary" href="#" role="button">Link</a>
+            <button class="btn btn-primary" type="submit">Button</button>
+            <input class="btn btn-primary" type="button" value="Input">
+            <input class="btn btn-primary" type="submit" value="Submit">
+
+<!-- Si hay productos, mostrar botones -->
+            {% if productos %}
+                {% for producto in productos %}
+                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-warning btn-sm">
+                        Editar {{ producto.nombre }}
+                    </a>
+                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">
+                        Eliminar {{ producto.nombre }}
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
