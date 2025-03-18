@@ -1,3 +1,5 @@
+<!--index.html-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,5 +10,48 @@
 <body>
     <h2>Bienvenido, {{ request.user.username }}</h2>
     <a href="{% url 'logout' %}">Cerrar Sesión</a>
+
+    
+    <h3>Lista de Productos</h3>
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.precio }}</li>
+        {% empty %}
+            <p>No hay productos disponibles.</p>
+        {% endfor %}
+    </ul>
+
+    <h4 class="mt-4">Inventario de Productos</h4>
+    <a href="{% url 'agregar_producto' %}" class="btn btn-success mb-3">Agregar Producto</a>
+
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>${{ producto.precio }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>
+                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
 </body>
 </html>
